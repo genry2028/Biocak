@@ -1,3 +1,4 @@
+from moduls.dna_rna_modul import is_nucleic_acid, transcribe, reverse, complement, reverse_complement
 
 STANDART_DEOXYRIBONUCLEOTIDES = {"A", "C", "G", "T", "a", "c", "g", "t"}
 STANDART_RIBONUCLEOTIDES = {"A", "C", "G", "U", "a", "c", "g", "u"}
@@ -26,7 +27,7 @@ OPERATION = {
     "transcribe": transcribe,
     "reverse": reverse,
     "complement": complement,
-    "reverse_complement": reverse_complement,
+    "reverse_complement": reverse_complement
 }
 
 
@@ -52,3 +53,5 @@ def run_dna_rna_tools(*args: str):
     if len(result) == 1:
         return result[0]
     return result
+
+print(run_dna_rna_tools("ATuuTG", "is_nucleic_acid"))
