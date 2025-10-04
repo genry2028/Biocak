@@ -22,37 +22,37 @@ COMPLEMENT_RNA = {
 }
 
 
-def is_dna(sequence):
-    return set(sequence) <= STANDART_DEOXYRIBONUCLEOTIDES
+def is_dna(seq):
+    return set(seq) <= STANDART_DEOXYRIBONUCLEOTIDES
 
 
-def is_rna(sequence):
-    return set(sequence) <= STANDART_RIBONUCLEOTIDES
+def is_rna(seq):
+    return set(seq) <= STANDART_RIBONUCLEOTIDES
 
 
-def is_nucleic_acid(sequence):
-    return is_dna(sequence) or is_rna(sequence)
+def is_nucleic_acid(seq):
+    return is_dna(seq) or is_rna(seq)
 
 
-def transcribe(sequence):
-    return sequence.replace("T", "U").replace("t", "u")
+def transcribe(seq):
+    return seq.replace("T", "U").replace("t", "u")
 
 
-def reverse(sequence):
-    return sequence[::-1]
+def reverse(seq):
+    return seq[::-1]
 
 
-def complement_nucleic_acid(sequence, complement_nuc):
-    return "".join([complement_nuc[nucleotide] for nucleotide in sequence])
+def complement_nucleic_acid(seq, complement_nuc):
+    return "".join([complement_nuc[nucleotide] for nucleotide in seq])
 
 
-def complement(sequence):
-    if is_rna(sequence):
-        complement_seq = "".join([COMPLEMENT_RNA[nucleotide] for nucleotide in sequence])
-    if is_dna(sequence):
-        complement_seq = "".join([COMPLEMENT_DNA[nucleotide] for nucleotide in sequence])
+def complement(seq):
+    if is_rna(seq):
+        complement_seq = "".join([COMPLEMENT_RNA[nucleotide] for nucleotide in seq])
+    if is_dna(seq):
+        complement_seq = "".join([COMPLEMENT_DNA[nucleotide] for nucleotide in seq])
     return complement_seq
 
 
-def reverse_complement(sequence):
-    return reverse(complement(sequence))
+def reverse_complement(seq):
+    return reverse(complement(seq))
