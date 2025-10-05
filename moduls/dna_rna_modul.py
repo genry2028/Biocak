@@ -1,10 +1,9 @@
-from biocak import Nucleotide
-from typing import Optional
+from typing import Optional, Dict
 
 
-STANDART_DEOXYRIBONUCLEOTIDES: Nucleotide = {"A", "C", "G", "T", "a", "c", "g", "t"}
-STANDART_RIBONUCLEOTIDES: Nucleotide = {"A", "C", "G", "U", "a", "c", "g", "u"}
-COMPLEMENT_DNA: Nucleotide = {
+STANDART_DEOXYRIBONUCLEOTIDES: Dict[str, str] = {"A", "C", "G", "T", "a", "c", "g", "t"}
+STANDART_RIBONUCLEOTIDES: Dict[str, str] = {"A", "C", "G", "U", "a", "c", "g", "u"}
+COMPLEMENT_DNA: Dict[str, str] = {
     "A": "T",
     "a": "t",
     "G": "C",
@@ -14,7 +13,7 @@ COMPLEMENT_DNA: Nucleotide = {
     "T": "A",
     "t": "a",
 }
-COMPLEMENT_RNA: Nucleotide = {
+COMPLEMENT_RNA: Dict[str, str] = {
     "A": "U",
     "a": "u",
     "G": "C",

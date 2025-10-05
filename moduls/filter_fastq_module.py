@@ -1,6 +1,7 @@
 import collections
-from typing import Union, Counter
-from biocak import NumericTuple
+from typing import Union, Counter, Tuple
+
+type NumericTuple = Tuple[Union[int, float], Union[int, float]]
 
 
 def get_gc_content(seq: str) -> Union[int, float]:
