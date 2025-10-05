@@ -1,6 +1,10 @@
-STANDART_DEOXYRIBONUCLEOTIDES = {"A", "C", "G", "T", "a", "c", "g", "t"}
-STANDART_RIBONUCLEOTIDES = {"A", "C", "G", "U", "a", "c", "g", "u"}
-COMPLEMENT_DNA = {
+from biocak import Nucleotide
+from typing import Optional
+
+
+STANDART_DEOXYRIBONUCLEOTIDES: Nucleotide = {"A", "C", "G", "T", "a", "c", "g", "t"}
+STANDART_RIBONUCLEOTIDES: Nucleotide = {"A", "C", "G", "U", "a", "c", "g", "u"}
+COMPLEMENT_DNA: Nucleotide = {
     "A": "T",
     "a": "t",
     "G": "C",
@@ -10,7 +14,7 @@ COMPLEMENT_DNA = {
     "T": "A",
     "t": "a",
 }
-COMPLEMENT_RNA = {
+COMPLEMENT_RNA: Nucleotide = {
     "A": "U",
     "a": "u",
     "G": "C",
@@ -22,31 +26,80 @@ COMPLEMENT_RNA = {
 }
 
 
-def is_dna(seq):
+def is_dna(seq: str) -> bool:
+    """Checking if a DNA sequence is
+
+    Args:
+        seq (str): nucleotide acide sequence
+
+    Returns:
+        bool: True, if sequence is DNA
+              False, if sequence is not DNA
+    """
     return set(seq) <= STANDART_DEOXYRIBONUCLEOTIDES
 
 
-def is_rna(seq):
+def is_rna(seq: str) -> bool:
+    """Checking if a RNA sequence is
+
+    Args:
+        seq (str): nucleotide acide sequence
+
+    Returns:
+        bool: True, if sequence is RNA
+              False, if sequence is not RNA
+    """
     return set(seq) <= STANDART_RIBONUCLEOTIDES
 
 
-def is_nucleic_acid(seq):
+def is_nucleic_acid(seq: str) -> bool:
+    """Checking if a nucleotide acide (NA) sequence is
+
+    Args:
+        seq (str): nucleotide acide sequence
+
+    Returns:
+        bool: True, if sequence is NA
+              False, if sequence is not NA
+    """
     return is_dna(seq) or is_rna(seq)
 
 
-def transcribe(seq):
-    return seq.replace("T", "U").replace("t", "u")
+def transcribe(seq: str) -> Optional[str]:
+    """Transcribes DNA sequence to RNA sequence
+
+    Args:
+        seq (str): nucleotide acide sequence
+
+    Returns:
+        str: if seq is DNA, returns RNA sequence, else - None
+    """
+    if is_dna(seq):
+        return seq.replace("T", "U").replace("t", "u")
+    return
 
 
-def reverse(seq):
+def reverse(seq: str) -> str:
+    """Get reverse nucleotide acide sequence
+
+    Args:
+        seq (str): nucleotide acide sequence
+
+    Returns:
+        str: reverse nucleotide acide sequence
+    """
     return seq[::-1]
 
 
-def complement_nucleic_acid(seq, complement_nuc):
-    return "".join([complement_nuc[nucleotide] for nucleotide in seq])
+def complement(seq: str) -> str:
+    """Get a complementary sequence
 
+    Args:
+        seq (str): nucleotide acide sequence
 
-def complement(seq):
+    Returns:
+        str: complementary nucleotide acide sequence
+    """
     if is_rna(seq):
         complement_seq = "".join([COMPLEMENT_RNA[nucleotide] for nucleotide in seq])
     if is_dna(seq):
@@ -54,5 +107,13 @@ def complement(seq):
     return complement_seq
 
 
-def reverse_complement(seq):
+def reverse_complement(seq: str) -> str:
+    """Get a reverse complementary sequence
+
+    Args:
+        seq (str): nucleotide acide sequence
+
+    Returns:
+        str: reverse complementary nucleotide acide sequence
+    """
     return reverse(complement(seq))

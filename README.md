@@ -1,2 +1,5 @@
-# BioKak
-educational bioinformatics utility
+# BioCak
+
+### BioCak is a bioinformatics toolkit for processing nucleotide sequences.
+
+
