@@ -19,3 +19,26 @@ def convert_multiline_fasta_to_oneline(input_file, output_file=""):
 
 convert_multiline_fasta_to_oneline("/Users/alisasenko/Desktop/HW_python/Biocak/example/example_multiline_fasta.fasta")
 
+
+def parse_blast_output(input_file, output_file=""):
+    with open(input_file, "r") as blast_result, open(output_file, "w") as output_file:
+        result=[]
+        for line in blast_result:
+            if "Sequences producing significant alignments:" in line:
+                blast_result.readline()
+                blast_result.readline()
+                for line2 in blast_result:
+                    if "Alignments" in line2:
+                        break
+                    x=re.match(r'^(.+?)(?=\s+[A-Z][a-z]+(?:\s+[a-z]+)*\s*\.\.\.)', line2)
+                    if x:
+                        x = x.group()
+                        result.append(x+"\n")
+        result.sort()
+        print(result)
+        print("".join(result))
+        output_file.write("".join(result))
+                    
+                    
+parse_blast_output("/Users/alisasenko/Desktop/HW_python/Biocak/example/example_blast_results.txt", 
+                   "/Users/alisasenko/Desktop/HW_python/Biocak/example/out_example_blast_results.txt")
