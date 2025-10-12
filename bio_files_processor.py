@@ -1,5 +1,6 @@
 import os.path
 from pathlib import Path
+import re
 
 
 def convert_multiline_fasta_to_oneline(input_file, output_file=""):
@@ -17,3 +18,4 @@ def convert_multiline_fasta_to_oneline(input_file, output_file=""):
 
 
 convert_multiline_fasta_to_oneline("/Users/alisasenko/Desktop/HW_python/Biocak/example/example_multiline_fasta.fasta")
+
