@@ -67,7 +67,7 @@ def filter_fastq(
     gc_bounds: Bounds = (0, 100),
     length_bounds: Bounds = (0, 2**32),
     quality_threshold: Union[int, float] = 0,
-    output_fastq: str = ""
+    output_fastq: str = "",
 ) -> Reads:
     """Filtering  FASTQ reads by specified parameters
 
@@ -84,30 +84,18 @@ def filter_fastq(
     if not os.path.isfile(input_fastq):
         raise FileNotFoundError(f"{input_fastq} file not found!")
     if not output_fastq:
-        output_fastq = os.path.join(os.path.dirname(input_fastq),
-                                   Path("output_" + os.path.basename(input_fastq)))
+        output_fastq = os.path.join(
+            os.path.dirname(input_fastq),
+            Path("output_" + os.path.basename(input_fastq)),
+        )
     with open(input_fastq, "r") as input, open(output_fastq, "w") as output:
         current_read = []
         for line in input:
             if len(current_read) == 4:
                 seq, quality = current_read[1], current_read[3]
-                if read_verification(seq, quality, gc_bounds, length_bounds, quality_threshold):
+                if read_verification(
+                    seq, quality, gc_bounds, length_bounds, quality_threshold
+                ):
                     output.write("".join(current_read))
                 current_read = []
             current_read.append(line)
-
-
-filter_fastq("/Users/alisasenko/Desktop/HW_python/Biocak/example/example_fastq.fastq", 35, (30, 70), 30)
-
-
-# if __name__ == '__main__':
-#     args = sys.argv[1:]
-#     if len(args) < 1:
-#         print("Не передано название метода. Пример: python main.py function arg1 arg2")
-#         exit(1)
-#     func = args[0] # функция (filter_fastq, run_dna_rna_tools)
-#     # Передаваемые к ней аргументы записываются в переменную func_args
-#     func_args = args[1:]
-#     # result = globals()["run_dna_rna_tools"]("ATTG", "AAyya", "Atguc", "aaugc", "is_nucleic_acid")
-#     result = globals()[func](func_args)
-#     print(result)

@@ -6,8 +6,7 @@ type Bounds = Union[NumericTuple, int, float]
 
 
 def is_valid_gc_content(seq: str, gc_bounds: NumericTuple) -> bool:
-    """Filters sequences by GС content as a percentage
-    """
+    """Filters sequences by GС content as a percentage"""
     if type(gc_bounds) is not tuple:
         gc_bounds = (0, gc_bounds)
     content: Counter[str] = collections.Counter(seq.upper())
@@ -16,8 +15,7 @@ def is_valid_gc_content(seq: str, gc_bounds: NumericTuple) -> bool:
 
 
 def is_valid_quality(quality: str, quality_threshold: Union[int, float]) -> bool:
-    """Filters sequences by average quality
-    """
+    """Filters sequences by average quality"""
     content_quality: Counter[str] = collections.Counter(quality)
     score: Union[int, float] = 0
     for symbol, number in content_quality.items():
@@ -26,8 +24,7 @@ def is_valid_quality(quality: str, quality_threshold: Union[int, float]) -> bool
 
 
 def is_valid_length(seq: str, length_bounds: NumericTuple) -> bool:
-    """Filters sequences by length
-    """
+    """Filters sequences by length"""
     if type(length_bounds) is not tuple:
         length_bounds = (0, length_bounds)
     return length_bounds[0] <= len(seq) <= length_bounds[1]
@@ -44,7 +41,7 @@ def read_verification(
 
     Args:
         seq (str): nucleotide acid sequence
-        quality (str): quality sequence of read 
+        quality (str): quality sequence of read
         gc_bounds (Bounds): interval for GC content
         length_bounds (Bounds): interval for length of read.
         quality_threshold (Union[int, float]): average read quality threshold.
@@ -53,7 +50,7 @@ def read_verification(
         bool
     """
     return (
-        is_valid_gc_content(seq, gc_bounds) and
-        is_valid_quality(quality, quality_threshold) and
-        is_valid_length(seq, length_bounds)
+        is_valid_gc_content(seq, gc_bounds)
+        and is_valid_quality(quality, quality_threshold)
+        and is_valid_length(seq, length_bounds)
     )
