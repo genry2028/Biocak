@@ -75,7 +75,8 @@ def transcribe(seq: str) -> Optional[str]:
     """
     if is_dna(seq):
         return seq.replace("T", "U").replace("t", "u")
-    return
+    else:
+        print(f"Sequence {seq} is not DNA.")
 
 
 def reverse(seq: str) -> str:

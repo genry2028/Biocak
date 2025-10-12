@@ -1,3 +1,4 @@
+import sys 
 from typing import Union, Tuple, Dict, Callable
 from moduls.dna_rna_modul import (
     is_nucleic_acid,
@@ -36,8 +37,9 @@ def run_dna_rna_tools(*args: str) -> Union[list[str], str]:
         List with modifated sequences, if number of sequences input is greater than 1
         String with modifated sequence, if number of sequences input is 1
     """
-    if len(args) <= 1:
+    if len(args[0]) <= 1:
         raise KeyError(f"False input: {args}")
+    *_, args = args
     *seqs, operation = args
     result: list[str] = []
     if operation not in OPERATION.keys():
@@ -50,7 +52,7 @@ def run_dna_rna_tools(*args: str) -> Union[list[str], str]:
                 if is_nucleic_acid(seq):
                     result.append(OPERATION[operation](seq))
                 else:
-                    print(f"Sequence {seq} not is nucleotide acid")
+                    print(f"Sequence {seq} is not nucleotide acid")
                     result.append(None)
     except Exception:
         print(f"Processing error: {Exception}")
@@ -91,3 +93,16 @@ def filter_fastq(
         if is_seq_valid(seq, quality, gc_bounds, length_bounds, quality_threshold):
             seqs_filtered[name] = read
     return seqs_filtered
+
+
+if __name__ == '__main__':
+    args = sys.argv[1:]
+    if len(args) < 1:
+        print("Не передано название метода. Пример: python main.py function arg1 arg2")
+        exit(1)
+    func = args[0] # функция (filter_fastq, run_dna_rna_tools)
+    # Передаваемые к ней аргументы записываются в переменную func_args
+    func_args = args[1:]
+    # result = globals()["run_dna_rna_tools"]("ATTG", "AAyya", "Atguc", "aaugc", "is_nucleic_acid")
+    result = globals()[func](func_args)
+    print(result)
