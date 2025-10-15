@@ -18,5 +18,9 @@ git clone https://github.com/genry2028/Biocak.git
 git clone git@github.com:genry2028/Biocak.git
 ```
 
+2. Вызов функции из консоли в разработке 
+...
+
+
 
 
