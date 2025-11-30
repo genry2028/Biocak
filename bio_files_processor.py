@@ -49,7 +49,8 @@ def parse_blast_output(input_file: str, output_file: str = "") -> None:
                     if "Alignments" in line2:
                         break
                     col1_line = re.match(
-                        r"^(.+?)(?=\s+[A-Z][a-z]+(?:\s+[a-z]+)*\s*\.\.\.)", line2
+                        r"^(.+?)(?=\s+[A-Z][a-z]+(?:\s+[a-z]+)*\s*\.\.\.)",
+                        line2
                     )
                     if col1_line:
                         col1_line = col1_line.group()
